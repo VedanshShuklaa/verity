@@ -49,62 +49,7 @@ The key difference: the vault PDA is derived from `[b"user_vault", your_pubkey, 
 
 ## User Flow
 
-### Listing an NFT
-
-```
-Step 1: Create Vault
-┌─────────────┐      ┌─────────────────────┐
-│ Your Wallet │ ---> │ Your Vault PDA      │
-│ (has NFT)   │      │ (you control this)  │
-└─────────────┘      └─────────────────────┘
-     NFT moves here once, stays here
-
-Step 2: Create Listing  
-┌─────────────────────┐      ┌─────────────────┐
-│ Your Vault PDA      │ <--- │ Listing Account │
-│ (still has NFT)     │      │ (just rules)    │
-└─────────────────────┘      └─────────────────┘
-     No transfer happens - listing just references the vault
-```
-
-### Buying an NFT
-
-```
-┌─────────────┐   SOL   ┌─────────────┐
-│   Buyer     │ ------> │   Seller    │
-└─────────────┘         └─────────────┘
-       ^                       
-       |  NFT                  
-       |                       
-┌─────────────────────┐        
-│ Seller's Vault PDA  │        
-└─────────────────────┘        
-
-All happens atomically in one transaction.
-Fees deducted, royalties paid, NFT transferred.
-```
-
-### Cancelling a Listing
-
-```
-┌─────────────────┐      ┌─────────────────────┐
-│ Listing Account │      │ Your Vault PDA      │
-│ (closes)        │      │ (NFT still here)    │
-└─────────────────┘      └─────────────────────┘
-
-Nothing to transfer. Your NFT never left your vault.
-```
-
-### Withdrawing from Vault
-
-```
-┌─────────────────────┐      ┌─────────────┐
-│ Your Vault PDA      │ ---> │ Your Wallet │
-│ (closes, rent back) │      │ (NFT back)  │
-└─────────────────────┘      └─────────────┘
-
-Only works when no active listing exists.
-```
+![User Flow](Verity.png)
 
 ## Why This Matters
 
@@ -229,9 +174,6 @@ await program.methods.withdrawFromVault()
 // NFT returns to your wallet, vault closes, rent refunded
 ```
 
-## Architecture Diagram
-
-![Architecture Diagram](Verity.png)
 
 ## Project Structure
 
