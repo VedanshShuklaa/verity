@@ -2,7 +2,6 @@ use anchor_lang::prelude::*;
 use crate::state::{Listing, UserVault, STATE_ACTIVE, STATE_CANCELLED};
 use crate::error::VerityError;
 
-/// Cancel listing - NFT stays in user vault (escrowless design)
 #[derive(Accounts)]
 pub struct CancelListing<'info> {
     /// Listing to cancel

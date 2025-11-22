@@ -229,6 +229,10 @@ await program.methods.withdrawFromVault()
 // NFT returns to your wallet, vault closes, rent refunded
 ```
 
+## Architecture Diagram
+
+![Architecture Diagram](Verity.png)
+
 ## Project Structure
 
 ```

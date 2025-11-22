@@ -5,10 +5,8 @@ use crate::state::{
 };
 use crate::error::VerityError;
 
-/// Create listing that REFERENCES user vault (doesn't custody NFT)
 #[derive(Accounts)]
 pub struct CreateListing<'info> {
-    /// Listing PDA - stores listing metadata only, not the NFT
     #[account(
         init,
         payer = seller,
@@ -37,7 +35,6 @@ pub struct CreateListing<'info> {
     #[account(mut)]
     pub seller: Signer<'info>,
     
-    /// CHECK: Mint is validated via user_vault
     pub mint: UncheckedAccount<'info>,
     
     pub system_program: Program<'info, System>,
